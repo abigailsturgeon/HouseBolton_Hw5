@@ -69,8 +69,8 @@ void Roman::convertFromRoman(const string &str)
 
 /*!
  * Function that takes two roman objects and adds them
- * @param s1: string being passed in
- * @return s2: returning total of roman objects
+ * @param s1: roman object being passed in
+ * @return s2: returns total
  */
 Roman Roman::operator+(const Roman& s1) const
 {
@@ -81,7 +81,7 @@ Roman Roman::operator+(const Roman& s1) const
 
 /*!
  * Function that takes a roman object and an integer and adds them
- * @param dec: takes an integer and adds it to roman object
+ * @param dec: integer being passed in
  * @return s1: returns total
  */
 Roman Roman::operator+(const int dec) const
@@ -91,23 +91,32 @@ Roman Roman::operator+(const int dec) const
     return s1;
 }
 /*
-int Roman::operator+(const Roman &r1) const
+Roman Roman::operator+(const int i) const
 {
     Roman s1;
-    int dec;
-    dec = value + s1.value;
-    return dec;
-
-}
- */
-/*
-void Roman::operator+=(const Roman &r1)
-{
-    Roman s1;
-    value += s1.value;
+    s1.value = dec + value;
+    return s1;
 
 }
 */
+
+/*!
+ * The left and right operands are Roman objects, but the left operand can change.
+ * @param r1
+ */
+void Roman::operator+=(const Roman &r1)
+{
+    value += r1.value;
+}
+
+/*!
+ * //The left operand is a Roman object, the right is an int number.  The left operand can change.
+ */
+void Roman::operator+=(const int dec)
+{
+    value += dec;
+}
+
 //This helps with testing, do not modify.
 void testConstructor()
 {
@@ -120,8 +129,8 @@ void testConstructor()
     checkTest("testConstructor #2", 66, a);
 
     //Test a bigger number.
-    //Roman b("MMMDDCCLLXXVVII");
-    //checkTest("testConstructor #3", 4332, b);
+    Roman b("MMMDDCCLLXXVVII");
+    checkTest("testConstructor #3", 4332, b);
 }
 
 //This helps with testing, do not modify.
@@ -170,16 +179,15 @@ c = a + 52;
 checkTest("testOperatorPlus #4", 68, c);
 // make sure the left operand wasn't modified
 checkTest("testOperatorPlus #5", 16, a);
-    /*
+/*
 //Test adding an int with an object
 c = 578 + a;
     checkTest("testOperatorPlus #6", 594, c);
     //make sure the right operand wasn't modified
     checkTest("testOperatorPlus #7", 16, a);
-     */
+*/
 }
 
-/*
 void testOperatorPlusEqual()
 {
 //Test adding two roman objects
@@ -187,9 +195,10 @@ Roman a("MLII");
     Roman b("DDCCI");
     a += b;
     checkTest("testOperatorPlusEqual #1", 2253, a);
+
     //make sure the right operand wasn't modified
     checkTest("testOperatorPlusEqual #2", 1201, b);
-    /*
+
     //Test adding on an integer
     b += 17;
     checkTest("testOperatorPlusEqual #3", 1218, b);
