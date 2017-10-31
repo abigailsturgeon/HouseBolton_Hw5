@@ -87,18 +87,9 @@ Roman Roman::operator+(const Roman& s1) const
 Roman Roman::operator+(const int dec) const
 {
     Roman s1;
-    s1.value = value + dec;
-    return s1;
-}
-/*
-Roman Roman::operator+(const int i) const
-{
-    Roman s1;
     s1.value = dec + value;
     return s1;
-
 }
-*/
 
 /*!
  * The left and right operands are Roman objects, but the left operand can change.
@@ -115,6 +106,17 @@ void Roman::operator+=(const Roman &r1)
 void Roman::operator+=(const int dec)
 {
     value += dec;
+}
+
+/*!
+ * Prefix ++ operator
+ * @return incremented roman
+ */
+Roman Roman::operator++()
+{
+    Roman s1;
+    s1.value = ++value;
+    return s1;
 }
 
 //This helps with testing, do not modify.
@@ -179,13 +181,13 @@ c = a + 52;
 checkTest("testOperatorPlus #4", 68, c);
 // make sure the left operand wasn't modified
 checkTest("testOperatorPlus #5", 16, a);
-/*
 //Test adding an int with an object
+    /*
 c = 578 + a;
     checkTest("testOperatorPlus #6", 594, c);
     //make sure the right operand wasn't modified
     checkTest("testOperatorPlus #7", 16, a);
-*/
+     */
 }
 
 void testOperatorPlusEqual()
@@ -205,7 +207,6 @@ Roman a("MLII");
 
 }
 
-/*
 void testOperatorIncrement()
 {
 //Test prefix increment
