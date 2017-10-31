@@ -12,6 +12,102 @@ Roman::Roman()
     value = 0;
 }
 
+/*!
+ * Constructor that accepts string and converts it to an integer
+ * @param roman
+ */
+Roman::Roman(const string &r)
+{
+    convertFromRoman(r);
+}
+
+/*!
+ * Function that takes a string of roman numerals
+ * and converts it to an integer
+ * @param roman
+ */
+void Roman::convertFromRoman(const string &str)
+{
+    int temp = 0;
+
+    for(int i = 0; i < str.length(); i++)
+    {
+        char c = str.at(i);
+        switch(c)
+        {
+            case 'M':
+                temp = temp + 1000;
+                break;
+            case 'D':
+                temp = temp + 500;
+                break;
+            case 'C':
+                temp = temp + 100;
+                break;
+            case 'L':
+                temp = temp + 50;
+                break;
+            case 'X':
+                temp = temp + 10;
+                break;
+            case 'V':
+                temp = temp + 5;
+                break;
+            case'I':
+                temp = temp + 1;
+                break;
+            default:
+                temp = temp + 0;
+                break;
+        }
+    }
+    value = temp;
+
+    cout << "Roman number " << str << " length " << str.length() << endl;
+    cout << "Decimal value: " << value << endl;
+}
+
+/*!
+ * Function that takes two roman objects and adds them
+ * @param s1: string being passed in
+ * @return s2: returning total of roman objects
+ */
+Roman Roman::operator+(const Roman& s1) const
+{
+    Roman s2;
+    s2.value = value + s1.value;
+    return s2;
+}
+
+/*!
+ * Function that takes a roman object and an integer and adds them
+ * @param dec: takes an integer and adds it to roman object
+ * @return s1: returns total
+ */
+Roman Roman::operator+(const int dec) const
+{
+    Roman s1;
+    s1.value = value + dec;
+    return s1;
+}
+/*
+int Roman::operator+(const Roman &r1) const
+{
+    Roman s1;
+    int dec;
+    dec = value + s1.value;
+    return dec;
+
+}
+ */
+/*
+void Roman::operator+=(const Roman &r1)
+{
+    Roman s1;
+    value += s1.value;
+
+}
+*/
 //This helps with testing, do not modify.
 void testConstructor()
 {
@@ -20,8 +116,8 @@ void testConstructor()
     checkTest("testConstructor #1", 0, blank);
 
     //Test reading in a number.
-    //Roman a("LXVI");
-    //checkTest("testConstructor #2", 66, a);
+    Roman a("LXVI");
+    checkTest("testConstructor #2", 66, a);
 
     //Test a bigger number.
     //Roman b("MMMDDCCLLXXVVII");
@@ -33,26 +129,103 @@ bool checkTest(string testName, int whatItShouldBe, const Roman& obj )
 {
     if (whatItShouldBe == obj.value)
     {
-        cout << "Passed " << testName << endl;
+        cout << "\nPassed " << testName << endl;
         return true;
     }
     else
     {
-        cout << "****** Failed test " << testName << " ****** " << endl << "     Object contained: "<< obj.value << endl << "     Output should have contained: " << whatItShouldBe << endl;
+        cout << "\n****** Failed test " << testName << " ****** " << endl << "     Object contained: "<< obj.value << endl << "     Output should have contained: " << whatItShouldBe << endl;
         return false;
     }
 }
 
 //This helps with testing, do not modify.
-bool checkTest(string testName, string whatItShouldBe, string whatItIs )
+bool checkTest(string testName, string whatItShouldBe, string whatItIs)
 {
     if (whatItShouldBe == whatItIs)
     {
-        cout << "Passed " << testName << endl;return true;
+        cout << "\nPassed " << testName << endl;
+        return true;
     }
     else
     {
-        cout << "****** Failed test " << testName << " ****** " << endl << "     Object contained: "<< whatItIs << endl << "     Output should have contained: " << whatItShouldBe << endl;
+        cout << "\n****** Failed test " << testName << " ****** " << endl << "     Object contained: "<< whatItIs << endl << "     Output should have contained: " << whatItShouldBe << endl;
         return false;
     }
 }
+
+void testOperatorPlus()
+{
+//Test adding two roman objects
+    Roman a("XVI");
+    Roman b("MDCLXVI");
+    Roman c = a + b;
+    checkTest("testOperatorPlus #1", 1682, c);
+    //make sure the left and right operands weren't modified
+    checkTest("testOperatorPlus #2", 16, a);
+    checkTest("testOperatorPlus #3", 1666, b);
+
+//Test adding an object with an int
+c = a + 52;
+checkTest("testOperatorPlus #4", 68, c);
+// make sure the left operand wasn't modified
+checkTest("testOperatorPlus #5", 16, a);
+    /*
+//Test adding an int with an object
+c = 578 + a;
+    checkTest("testOperatorPlus #6", 594, c);
+    //make sure the right operand wasn't modified
+    checkTest("testOperatorPlus #7", 16, a);
+     */
+}
+
+/*
+void testOperatorPlusEqual()
+{
+//Test adding two roman objects
+Roman a("MLII");
+    Roman b("DDCCI");
+    a += b;
+    checkTest("testOperatorPlusEqual #1", 2253, a);
+    //make sure the right operand wasn't modified
+    checkTest("testOperatorPlusEqual #2", 1201, b);
+    /*
+    //Test adding on an integer
+    b += 17;
+    checkTest("testOperatorPlusEqual #3", 1218, b);
+
+}
+
+/*
+void testOperatorIncrement()
+{
+//Test prefix increment
+Roman a("MLII");
+    Roman b("DDCCI");
+    b = ++a;
+    checkTest("testOperatorIncrement #1", 1053, a);
+    checkTest("testOperatorIncrement #2", 1053, b);
+}
+/*
+void testConsoleIO()
+{
+//Test reading in the data using the extraction operator >>
+cout << "Enter the text CCLX: ";
+    Roman a;
+    cin >> a;
+    checkTest("testConsoleIO #1", 260, a);
+    //Test outputting data using the insertion operator <<
+    cout << "testConsoleIO #2" << endl << "If this says 260, this test passed: " << a << endl;
+}
+/*
+void testOutput()
+{
+    Roman a("MDCLXVI");
+}string b = a.convertToRoman();
+checkTest("testOutput #1", "MDCLXVI", b);
+//This is really the value 7.  Your code should correctly read this in and convert it back to VII.
+Roman c("IIIIIII");
+b = c.convertToRoman();
+checkTest("testOutput #2", "VII", b);
+}
+ */

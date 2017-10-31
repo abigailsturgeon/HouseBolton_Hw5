@@ -5,5 +5,10 @@ using namespace std;
 int main()
 {
     testConstructor();
+    testOperatorPlus();
+    //testOperatorPlusEqual();
+    //testOperatorIncrement();
+    //testOutput();
+
     return 0;
 }
