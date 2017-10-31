@@ -243,18 +243,6 @@ Roman a("MLII");
     checkTest("testOperatorIncrement #1", 1053, a);
     checkTest("testOperatorIncrement #2", 1053, b);
 }
-
-/*
-void testConsoleIO()
-{
-//Test reading in the data using the extraction operator >>
-cout << "Enter the text CCLX: ";
-    Roman a;
-    cin >> a;
-    checkTest("testConsoleIO #1", 260, a);
-    //Test outputting data using the insertion operator <<
-    cout << "testConsoleIO #2" << endl << "If this says 260, this test passed: " << a << endl;
-}
 /*
 void testOutput()
 {
