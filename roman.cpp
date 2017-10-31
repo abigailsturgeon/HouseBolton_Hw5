@@ -22,7 +22,24 @@ Roman::Roman(const string &r)
 }
 
 /*!
- * Function that takes a string of roman numerals
+ * Gets the value
+ * @return
+ */
+unsigned int Roman::getValue() const
+{
+    return value;
+}
+
+/*!
+ * Sets the value
+ * @param value
+ */
+void Roman::setValue(unsigned int value)
+{
+    Roman::value = value;
+}
+/*!
+ * Takes a string of roman numerals
  * and converts it to an integer
  * @param roman
  */
@@ -68,7 +85,7 @@ void Roman::convertFromRoman(const string &str)
 }
 
 /*!
- * Function that takes two roman objects and adds them
+ * Takes two roman objects and adds them
  * @param s1: roman object being passed in
  * @return s2: returns total
  */
@@ -80,7 +97,7 @@ Roman Roman::operator+(const Roman& s1) const
 }
 
 /*!
- * Function that takes a roman object and an integer and adds them
+ * Adds a roman object and an int
  * @param dec: integer being passed in
  * @return s1: returns total
  */
@@ -89,6 +106,18 @@ Roman Roman::operator+(const int dec) const
     Roman s1;
     s1.value = dec + value;
     return s1;
+}
+
+/*!
+ * Adds an int with an object
+ * @param i: int
+ * @param r1: roman object
+ * @return r1: returns total
+ */
+Roman operator+(const int i, Roman r1)
+{
+    r1.setValue(i + r1.getValue());
+    return r1;
 }
 
 /*!
@@ -110,7 +139,7 @@ void Roman::operator+=(const int dec)
 
 /*!
  * Prefix ++ operator
- * @return incremented roman
+ * @return increments roman
  */
 Roman Roman::operator++()
 {
@@ -177,17 +206,15 @@ void testOperatorPlus()
     checkTest("testOperatorPlus #3", 1666, b);
 
 //Test adding an object with an int
-c = a + 52;
-checkTest("testOperatorPlus #4", 68, c);
+    c = a + 52;
+    checkTest("testOperatorPlus #4", 68, c);
 // make sure the left operand wasn't modified
-checkTest("testOperatorPlus #5", 16, a);
+    checkTest("testOperatorPlus #5", 16, a);
 //Test adding an int with an object
-    /*
-c = 578 + a;
+    c = 578 + a;
     checkTest("testOperatorPlus #6", 594, c);
     //make sure the right operand wasn't modified
     checkTest("testOperatorPlus #7", 16, a);
-     */
 }
 
 void testOperatorPlusEqual()
@@ -216,6 +243,7 @@ Roman a("MLII");
     checkTest("testOperatorIncrement #1", 1053, a);
     checkTest("testOperatorIncrement #2", 1053, b);
 }
+
 /*
 void testConsoleIO()
 {

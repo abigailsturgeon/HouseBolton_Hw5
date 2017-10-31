@@ -22,6 +22,8 @@ private:
     //string convertToRoman() const;  //The method that helps us take an integer and turn it into a roman numeral
     void convertFromRoman(const string &r);  //The method that helps us take an roman numeral in a string and convert it into the integer.
 public:
+    unsigned int getValue() const;
+    void setValue(unsigned int value);
     Roman();  // Default constructor that allows us to make empty objects.
     Roman(const string&);  //The constructor which accepts a string and  converts it internally to an integer.  It actually just forwards it onto convertFromRoman()
     Roman operator+(const Roman &s1) const;  //The left and right operands are Roman objects
@@ -34,5 +36,5 @@ public:
     friend bool checkTest(string, int, const Roman&);  //A testing function.  It is friended so it can access the class.
     friend void testOutput();   // Another test function that needs to access private class members.
 };
-
+Roman operator +(const int i, Roman r1);
 #endif //HOUSEBOLTON_HW5_ROMAN_H
