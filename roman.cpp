@@ -3,6 +3,9 @@
 //
 
 #include "roman.h"
+#include <iostream>
+#include <string>
+using namespace std;
 
 /*!
  * Default constructor set to 0
@@ -90,15 +93,7 @@ Roman Roman::operator+(const int dec) const
     s1.value = value + dec;
     return s1;
 }
-/*
-Roman Roman::operator+(const int i) const
-{
-    Roman s1;
-    s1.value = dec + value;
-    return s1;
 
-}
-*/
 
 /*!
  * The left and right operands are Roman objects, but the left operand can change.

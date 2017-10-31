@@ -2,3 +2,5 @@
 .gitignore
 .idea/workspace.xml
 cmake-build-debug/
+/Project1/.vs/Project1/v14
+/Project1
