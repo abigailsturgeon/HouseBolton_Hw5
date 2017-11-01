@@ -3,6 +3,7 @@
 //
 
 #include "roman.h"
+#include <string>
 
 /*!
  * Default constructor set to 0
@@ -38,6 +39,7 @@ void Roman::setValue(unsigned int value)
 {
     Roman::value = value;
 }
+
 /*!
  * Takes a string of roman numerals
  * and converts it to an integer
@@ -83,7 +85,71 @@ void Roman::convertFromRoman(const string &str)
     cout << "Roman number " << str << " length " << str.length() << endl;
     cout << "Decimal value: " << value << endl;
 }
+/*!
+* Takes an interger
+* and converts to roman numerals 
+* @param roman
+*/
+string Roman::convertToRoman() const
+{
+	int convertNum = value;
+	
+	string RomanN;
+	while (convertNum > 0)
+	{
 
+		if (convertNum > 999)
+		{
+			RomanN += 'M';
+			convertNum -= 1000;
+			
+		}
+		else if (convertNum > 499 && convertNum < 1000)
+		{
+			RomanN += 'D';
+			convertNum -= 500;
+			
+		}
+		else if (convertNum > 99 && convertNum < 500)
+		{
+			RomanN += 'C';
+			convertNum -= 100;
+		
+		}
+		else if (convertNum > 49 && convertNum < 100)
+		{
+			RomanN += 'L';
+			convertNum -= 50;
+			
+		}
+		else if (convertNum > 9 && convertNum < 50)
+		{
+			RomanN += 'X';
+			convertNum -= 10;
+			
+		}
+		else if (convertNum > 4 && convertNum < 10)
+		{
+			RomanN += 'V';
+			convertNum -= 5;
+			
+		}
+		else if (convertNum > 0 && convertNum < 5)
+		{
+			RomanN += 'I';
+			convertNum -= 1;
+			
+		}
+	
+		
+
+	}
+	
+	return  RomanN;
+
+}
+
+/*converts to correct roman numeral notation*/
 /*!
  * Takes two roman objects and adds them
  * @param s1: roman object being passed in
@@ -243,15 +309,16 @@ Roman a("MLII");
     checkTest("testOperatorIncrement #1", 1053, a);
     checkTest("testOperatorIncrement #2", 1053, b);
 }
-/*
+
 void testOutput()
-{
-    Roman a("MDCLXVI");
-}string b = a.convertToRoman();
-checkTest("testOutput #1", "MDCLXVI", b);
-//This is really the value 7.  Your code should correctly read this in and convert it back to VII.
-Roman c("IIIIIII");
-b = c.convertToRoman();
-checkTest("testOutput #2", "VII", b);
-}
- */
+	{
+		Roman a("MDCLXVI");
+	string b = a.convertToRoman();
+	checkTest("testOutput #1", "MDCLXVI", b);
+	//This is really the value 7.  Your code should correctly read this in and convert it back to VII.
+	Roman c("IIIIIII");
+	b = c.convertToRoman();
+	checkTest("testOutput #2", "VII", b);
+	}
+
+ 

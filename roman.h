@@ -19,7 +19,7 @@ class Roman
 {
 private:
     unsigned int value;
-    //string convertToRoman() const;  //The method that helps us take an integer and turn it into a roman numeral
+    string convertToRoman() const;  //The method that helps us take an integer and turn it into a roman numeral
     void convertFromRoman(const string &r);  //The method that helps us take an roman numeral in a string and convert it into the integer.
 public:
     unsigned int getValue() const;

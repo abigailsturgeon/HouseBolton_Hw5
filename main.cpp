@@ -8,7 +8,7 @@ int main()
     testOperatorPlus();
     testOperatorPlusEqual();
     testOperatorIncrement();
-    //testOutput();
-
+    testOutput();
+	
     return 0;
 }
